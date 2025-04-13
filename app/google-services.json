@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "827822400139",
+    "project_id": "satara-tourism-app",
+    "storage_bucket": "satara-tourism-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827822400139:android:732a9560dbd16dbb7f6a8e",
+        "android_client_info": {
+          "package_name": "com.prabhakar.sataratourismapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "827822400139-d54khpc70f1bcsos43b3uhkl0ivorf63.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.prabhakar.sataratourismapp",
+            "certificate_hash": "ca8a5e9e7b12a0eaaff1115c206f180b0fe9a701"
+          }
+        },
+        {
+          "client_id": "827822400139-jc78h76j8r81hqpmuoq14h0t5skhf8qp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSTVLiBjr1g-OtXF6pRQMaS7JjSP5OY7Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "827822400139-jc78h76j8r81hqpmuoq14h0t5skhf8qp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

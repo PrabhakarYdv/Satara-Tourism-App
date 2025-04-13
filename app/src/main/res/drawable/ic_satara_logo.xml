@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Background circle -->
+    <path
+        android:fillColor="#E0F7FA"
+        android:pathData="M50,0a50,50 0 1,0 0.1,0Z" />
+
+    <!-- Sun -->
+    <path
+        android:fillColor="#FFCA28"
+        android:pathData="M75,20a7,7 0 1,1 -14,0a7,7 0 1,1 14,0Z" />
+
+    <!-- Hills -->
+    <path
+        android:fillColor="#81C784"
+        android:pathData="M0,70 Q20,50 40,70 T80,70 Q90,60 100,70 L100,100 L0,100 Z" />
+
+    <!-- Fort-like Structure (Ajinkyatara) -->
+    <path
+        android:fillColor="#6D4C41"
+        android:pathData="M40,50h20v10h-5v-5h-10v5h-5z" />
+
+    <!-- Road or River -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:pathData="M45,70 Q50,75 55,70 T65,80 Q60,90 50,85 Q40,90 35,80 Q40,75 45,70Z" />
+
+    <!-- Overlaying circle outline -->
+    <path
+        android:strokeColor="#00796B"
+        android:strokeWidth="2"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M50,2A48,48 0 1,1 49.9,2Z" />
+</vector>

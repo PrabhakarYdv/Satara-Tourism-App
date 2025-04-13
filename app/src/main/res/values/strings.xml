@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Satara Tourism App</string>
+    <string name="default_web_client_id">YOUR_CLIENT_ID_HERE.apps.googleusercontent.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="satara_places">
+        <item>Ajinkyatara Fort</item>
+        <item>Kaas Plateau</item>
+        <item>Thoseghar Waterfall</item>
+        <item>Sajjangad Fort</item>
+        <item>Kaas Lake</item>
+        <item>Yawateshwar Temple</item>
+        <item>Char Bhinti</item>
+        <item>Kas Pathar Valley</item>
+        <item>Kaas Wildlife Sanctuary</item>
+        <item>Satara City Center</item>
+    </string-array>
+
+</resources>
