@@ -2,29 +2,25 @@ package com.prabhakar.sataratourismapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.util.Patterns;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final int SIGN_IN = 1001;
     private CardView signInBtn;
-    private FirebaseAuth firebaseAuth;
-    private GoogleSignInClient googleSignInClient;
+    private FirebaseAuth mAuth;
+
+    private EditText edtEmail, edtPassword;
+    private Button btnLogin;
+    private TextView txtSignup;
 
     @Override
 
@@ -32,63 +28,57 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        signInBtn = findViewById(R.id.signin_btn);
-        firebaseAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
-        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
 
-        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
-        signInBtn.setOnClickListener(view -> signIn());
-    }
+        edtEmail = findViewById(R.id.edtEmail);
+        edtPassword = findViewById(R.id.edtPassword);
+        btnLogin = findViewById(R.id.btnLogin);
+        txtSignup = findViewById(R.id.txtSignup);
 
-    private void signIn() {
-        Intent signInIntent = googleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, SIGN_IN);
-    }
+        // Login with Email/Password
+        btnLogin.setOnClickListener(v -> loginWithEmail());
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        // Go to Signup
+        txtSignup.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+            startActivity(intent);
+        });
 
-        if (requestCode == SIGN_IN) {
-            Log.d("data", data.toString());
-
-            if (resultCode == RESULT_OK && data != null) {
-                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-
-                try {
-                    GoogleSignInAccount googleSignInAccount = task.getResult(ApiException.class);
-                    if (googleSignInAccount != null) {
-                        firebaseAuthWIthGoogle(googleSignInAccount);
-
-                    }
-                } catch (ApiException apiException) {
-
-                }
-
-            } else {
-                Log.d("signin", "SignIn Failed" + resultCode);
-            }
+        if (mAuth.getCurrentUser() != null) {
+            goToMain();
         }
 
     }
 
-    private void firebaseAuthWIthGoogle(GoogleSignInAccount googleSignInAccount) {
-        AuthCredential authCredential = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
-        firebaseAuth.signInWithCredential(authCredential)
-                .addOnCompleteListener(this
-                        , task -> {
-                            if (task.isSuccessful()) {
-                                Intent intent = new Intent(this, HomeActivity.class);
-                                startActivity(intent);
-                                finish();
-                            } else {
-                                Toast.makeText(this, "Authentication Failed", Toast.LENGTH_SHORT).show();
-                                Log.e("authlogin", "firebaseAuthWIthGoogleFailed: ");
-                            }
-                        });
+    private void loginWithEmail() {
+        String email = edtEmail.getText().toString().trim();
+        String password = edtPassword.getText().toString().trim();
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            edtEmail.setError("Enter valid email");
+            edtEmail.requestFocus();
+            return;
+        }
+        if (password.length() < 6) {
+            edtPassword.setError("Password must be at least 6 characters");
+            edtPassword.requestFocus();
+            return;
+        }
+
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnSuccessListener(authResult -> {
+                    Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+                    goToMain();
+                    finish();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Login failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void goToMain() {
+        startActivity(new Intent(this, HomeActivity.class));
+        finish();
     }
 }

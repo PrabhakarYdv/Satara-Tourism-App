@@ -9,14 +9,12 @@ import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;
 
 
@@ -27,7 +25,6 @@ public class DashboardFragment extends Fragment {
     private ImageView userPhoto;
     private Button logoutButton;
     private FirebaseAuth firebaseAuth;
-    private GoogleSignInClient googleSignInClient;
 
 
     @Override
@@ -45,7 +42,7 @@ public class DashboardFragment extends Fragment {
         // Fetch user info
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(requireContext());
         if (account != null) {
-            userName.setText(account.getDisplayName());
+            userName.setText(account.getEmail());
 
             // Load photo using Glide
             Glide.with(this)
@@ -57,7 +54,7 @@ public class DashboardFragment extends Fragment {
 
         // Logout button click
         logoutButton.setOnClickListener(v -> {
-            if (firebaseAuth.getCurrentUser()!=null){
+            if (firebaseAuth.getCurrentUser() != null) {
                 firebaseAuth.signOut();
                 startActivity(new Intent(getActivity(), LoginActivity.class));
                 requireActivity().finish();

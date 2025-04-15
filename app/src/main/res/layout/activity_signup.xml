@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="24dp"
     android:scrollbars="none"
-    tools:context=".LoginActivity">
+    tools:context=".SignupActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:src="@drawable/ic_satara_logo" />
 
         <EditText
-            android:id="@+id/edtEmail"
+            android:id="@+id/edtSignupEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -32,7 +32,7 @@
             android:padding="12dp" />
 
         <EditText
-            android:id="@+id/edtPassword"
+            android:id="@+id/edtSignupPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
@@ -42,23 +42,24 @@
             android:padding="12dp" />
 
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnSignup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="24dp"
             android:backgroundTint="#D61818"
-            android:text="Login"
+            android:text="Create Account"
             android:textColor="#FFFFFF"
             android:textSize="16dp" />
 
         <TextView
-            android:id="@+id/txtSignup"
+            android:id="@+id/txtAlreadyAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Don't have an account? Sign up"
+            android:text="Already have an account? Login"
             android:textColor="#D61818"
             android:textSize="14dp"
             android:textStyle="bold" />
+
     </LinearLayout>
+
 </ScrollView>
