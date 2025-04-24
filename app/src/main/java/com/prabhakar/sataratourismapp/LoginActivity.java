@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         if (mAuth.getCurrentUser() != null) {
-            goToMain();
+            goToHome();
         }
 
     }
@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener(authResult -> {
                     Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
-                    goToMain();
+                    goToHome();
                     finish();
                 })
                 .addOnFailureListener(e -> {
@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void goToMain() {
+    private void goToHome() {
         startActivity(new Intent(this, HomeActivity.class));
         finish();
     }

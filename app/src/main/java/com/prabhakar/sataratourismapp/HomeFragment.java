@@ -24,7 +24,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     FirebaseAuth firebaseAuth;
-    RecyclerView attractionsRecyclerView, eventsRecyclerView;
+    RecyclerView attractionsRecyclerView, eventsRecyclerView, popularHotels;
     Button btnTripPlanner, btnAbout, btnContact;
     ViewPager2 viewPager;
     TabLayout tabLayout;
@@ -42,12 +42,14 @@ public class HomeFragment extends Fragment {
 
         attractionsRecyclerView = view.findViewById(R.id.attractionsRecyclerView);
         eventsRecyclerView = view.findViewById(R.id.eventsRecyclerView);
+        popularHotels = view.findViewById(R.id.hotelRecyclerView);
         btnTripPlanner = view.findViewById(R.id.btnTripPlanner);
         btnAbout = view.findViewById(R.id.btnAbout);
         btnContact = view.findViewById(R.id.btnContact);
 
         setupAttractions();
         setupEvents();
+        setUpHotels();
 
         btnTripPlanner.setOnClickListener(v ->
                 startActivity(new Intent(requireActivity(), BookTripActivity.class))
@@ -130,6 +132,20 @@ public class HomeFragment extends Fragment {
         eventsRecyclerView.setLayoutManager(
                 new LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false));
         eventsRecyclerView.setAdapter(new EventAdapter(requireActivity(), events));
+    }
+
+    private void setUpHotels() {
+        List<Place> hotels = new ArrayList<>();
+        hotels.add(new Place("Preeti Hotel", R.drawable.preeti));
+        hotels.add(new Place("Hotel Manasi Pride", R.drawable.mansi));
+        hotels.add(new Place("Greenfield Hotel", R.drawable.greenfield));
+        hotels.add(new Place("Gandharv Hotel", R.drawable.gandharv));
+        hotels.add(new Place("Manas Resto", R.drawable.manas));
+        hotels.add(new Place("Hotel Shinde", R.drawable.shinde));
+        hotels.add(new Place("Hotel Sairja", R.drawable.sairja));
+
+        popularHotels.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        popularHotels.setAdapter(new PlaceAdapter(requireActivity(), hotels));
     }
 
 }
